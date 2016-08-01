@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
-
+use Entrust;
+use Illuminate\Support\Facades\Auth;
 class HomeController extends Controller
 {
     /**
@@ -24,6 +25,19 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if (Entrust::hasRole('admin')) return $this->adminDashboard();
+        if (Entrust::hasRole('member')) return $this->memberDashboard();
         return view('home');
+    }
+
+    protected function adminDashboard()
+    {
+        return view('dashboard.admin');
+    }
+
+    protected function memberDashboard()
+    {
+        $borrowLogs= Auth::user()->borrowLogs()->borrowed()->get();
+        return view('dashboard.member', compact('borrowLogs'));
     }
 }

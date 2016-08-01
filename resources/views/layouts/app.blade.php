@@ -27,9 +27,12 @@
     </style>
     -->
     <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('css/app.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/jquery.dataTables.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/dataTables.bootstrap.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('css/selectize.bootstrap3.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('css/selectize.css')}}">
+     <link rel="stylesheet" type="text/css" href="{{asset('css/app.css')}}">
+    
 </head>
 <body id="app-layout">
     <nav class="navbar navbar-default navbar-static-top">
@@ -56,7 +59,12 @@
                     <li><a href="{{ url('/home') }}">Dashboard</a></li>
                     @role('admin')
                     <li><a href="{{ route('admin.authors.index') }}">Penulis</a></li>
+                    <li><a href="{{route('admin.members.index')}}">Member</a></li>
+                    <li><a href="{{route('admin.books.index')}}">Buku</a></li>
                     @endrole
+                    @if(auth()->check())
+                    <li><a href="{{url('/settings/profile')}}">Profil</a></li>
+                    @endif
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -72,6 +80,7 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{url('/settings/password')}}"><i class="fa fa-btn fa-lock"></i>Ubah Password</a></li>
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>
@@ -91,6 +100,7 @@
     -->
     <script src="{{asset('js/jquery-2.2.4.min.js')}}"></script>
     <script src="{{asset('js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('js/selectize.min.js')}}"></script>
     <script src="{{asset('js/app.js')}}"></script>
     <script src="{{asset('js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('js/dataTables.bootstrap.min.js')}}"></script>
